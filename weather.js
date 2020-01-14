@@ -1,26 +1,45 @@
    
-const timeurl = "https://api.ipgeolocation.io/timezone?apiKey=af0a550050f542fea387e029f6a8573c";
+        //Retrieve current date and time
+function getCurrentDate(){
+        var curDate=new Date();
+        document.getElementById("showDate").innerHTML = curDate.toString();
+        }
 
-function getData() {
+function getData(){
 
         getData.preventDefault;
         const apiurl = "http://api.openweathermap.org/data/2.5/weather?q=";
         const apikey = "&APPID=b81c4f92c241cdbffd910c8e91a15d98";
         var apicity = document.getElementById(`searchcity`).value;
         var url = apiurl + apicity + apikey;
-        console.log(apicity);
-                        
-$.ajax ({
+                                
+        $.ajax ({
         url: url,
         success: 
-        
+
 function(result){    
-        
+
+         /*Display relevant background image in dataoverlay
+         var rawMain = (result.weather[0].main);
+         if (rawMain == 'Rain') 
+         {dataoverlay.style.backgroundImage = 'url(rain.jpg)'}
+         else if (rawMain == 'Clear') 
+         {dataoverlay.style.backgroundImage = 'url(clear.jpg)'}
+         else if (rawMain == 'Snow') 
+         {dataoverlay.style.backgroundImage = 'url(snow.jpg)'}
+         else if (rawMain == 'Clouds') 
+         {dataoverlay.style.backgroundImage = 'url(clouds.jpg)'}
+         else if (rawMain == 'Extreme') 
+         {dataoverlay.style.backgroundImage = 'url(extreme.jpg)'}
+         else if (rawMain == 'Mist') 
+         {dataoverlay.style.backgroundImage = 'url(mist.jpg)'}
+         else {dataoverlay.style.backgroundcolor = 'black'}*/
+                         
         //Reset search input box
         $('#searchcity').val('');
         
         //Display City
-        let displayCity = `City: ${result.name}`;
+        let displayCity = `Location: ${result.name}`;
         $("#location").html(displayCity);
                 
        //Display Temperature
@@ -43,7 +62,7 @@ function(result){
         var capitalSky = capitalizeWords(rawSky);
         let displaySky = `Sky Condition: ${capitalSky}`;        
         $("#sky").html(displaySky);
-
+        
         //Display Pressure
         let rawPressure = (result.main.pressure / 33.863886666667);
         let displayPressure =`Pressure: ${rawPressure.toFixed(2)} in/Hg`;
